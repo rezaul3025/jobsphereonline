@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <center>
+	<h3>Post job</h3>
+	<hr/>
+  </center>
+  <div ng-controller="jobsphereonlineController"> 
+   <form class="form-horizontal">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="title">Title</label>
+    <div class="col-sm-6">
+      <input type="text" ng-model="job.title" class="form-control" id="title" placeholder="Title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="description">Description</label>
+    <div class="col-sm-8">
+      <jso-ck-editor ng-model="job.description" name="description" id="description"></jso-ck-editor>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="category">Category</label>
+    <div class="col-sm-6">
+      <jso-category-div ng-model="job.category" name="category" id="category"></jso-category-div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="locations">Location</label>
+    <div class="col-sm-6">
+      <jso-location-div ng-model="job.location" name="location" id="location"></jso-location-div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="applicationoption">Application option</label>
+    <div class="col-sm-3">
+      	<select class="form-control" ng-model="job.applicationoption" name="applicationoption" id="applicationoption">
+	    	<option>website</option>
+	    	<option>email</option>
+	    	<option>jobsphere</option>
+  		</select>
+  		<small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="applicationurl">Application Url</label>
+    <div class="col-sm-6">
+       <input type="text" class="form-control" ng-model="job.applicationurl" id="applicationurl" placeholder="Application Url">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="tags">Tag</label>
+    <div class="col-sm-6">
+      <jso-tag-div ng-model="job.tag" name="tag" id="tag"></jso-tag-div>
+      <small id="fileHelp" class="form-text text-muted">Add related tag for the job which reflect the job specification. e.g. java, CA etc.</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" class="btn btn-default" ng-click="postJob(job)" >Submit</button>
+    </div>
+  </div>
+</form>
+</div>
+ {% endblock %}

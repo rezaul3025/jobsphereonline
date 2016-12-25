@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block content %}
+  {% if jobs %}
+  	<h3>Total {{ jobs.paginator.count }} job(s) found</h3>
+  	<p>Currently showing <b>{{ jobs.start_index }}</b> to <b>{{ jobs.end_index }}</b> of {{ jobs.paginator.count }} | <small>Query : {{searchKeyLocation}} {{searchKeyTag}}</small></p>
+    <table class="table">
+    {% for job in jobs %}
+        <tr>
+        	<td>
+	        	<h4><a href="/job/{{job.pk}}/">{{job.title}}</a></h4>
+	        	{{job.description |safe}}
+		        {% for tag in job.tag.all%}
+		         <span class="label label-default">{{tag.name}}</span>
+		        {% endfor %}
+		        <br/>
+		        <br/>
+	        </td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% if jobs.has_other_pages %}
+	  <ul class="pagination">
+	    {% if jobs.has_previous %}
+	      <li><a href="?page={{ jobs.previous_page_number }}&location={{searchKeyLocation}}&tag={{searchKeyTag}}">&laquo;</a></li>
+	    {% else %}
+	      <li class="disabled"><span>&laquo;</span></li>
+	    {% endif %}
+	    {% for i in jobs.paginator.page_range %}
+	      {% if jobs.number == i %}
+	        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+	      {% else %}
+	        <li><a href="?page={{ i }}&location={{searchKeyLocation}}&tag={{searchKeyTag}}">{{ i }}</a></li>
+	      {% endif %}
+	    {% endfor %}
+	    {% if jobs.has_next %}
+	      <li><a href="?page={{jobs.next_page_number }}&location={{searchKeyLocation}}&tag={{searchKeyTag}}">&raquo;</a></li>
+	    {% else %}
+	      <li class="disabled"><span>&raquo;</span></li>
+	    {% endif %}
+	  </ul>
+	{% endif %}
+	{% else %}
+	    <p>No jobs are available.</p>
+	{% endif %}
+ {% endblock %}
